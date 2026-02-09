@@ -1,0 +1,289 @@
+/* Reset + farby */
+:root {
+  color-scheme: light dark;
+
+  /* Light */
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --accent: #3b82f6;
+  --accent-600: #2563eb;
+  --shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1020;
+    --card: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #1f2937;
+    --accent: #60a5fa;
+    --accent-600: #3b82f6;
+    --shadow: 0 1px 2px rgba(0,0,0,.3);
+  }
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Layout */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* Ovládacie prvky */
+.controls {
+  display: grid;
+  gap: 16px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.select, .input, .btn {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.select { appearance: none; }
+
+.btn {
+  display: inline-flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .02s;
+  user-select: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--accent);
+  border-color: transparent;
+  color: white;
+}
+.btn-primary:hover { background: var(--accent-600); }
+
+.btn-ghost {
+  background: transparent;
+}
+
+/* Karty dňa + tabuľka */
+.day-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.day-head {
+  padding: 10px 12px;
+  font-weight: 800;
+  background: color-mix(in oklab, var(--card) 80%, var(--border));
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th, .table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+.table thead th {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.table tbody tr:hover {
+  background: color-mix(in oklab, var(--card) 92%, var(--border));
+}
+
+.helper {
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+/* Hlavička sekcie */
+.section-title {
+  margin: 18px 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* --- Kombinovaný týždenný grid --- */
+.grid-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.weekgrid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 880px; /* nech sa pohodlne scrolluje na menších šírkach */
+}
+
+.weekgrid th, .weekgrid td {
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.weekgrid thead th {
+  position: sticky;
+  top: 0;
+  background: color-mix(in oklab, var(--card) 88%, var(--border));
+  z-index: 1;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.weekgrid .grid-first {
+  width: 72px;
+}
+
+.weekgrid .grid-day {
+  font-weight: 800;
+  background: color-mix(in oklab, var(--card) 80%, var(--border));
+  min-width: 72px;
+}
+
+.grid-time { font-variant-numeric: tabular-nums; }
+
+/* bloky rozvrhu */
+.slot {
+  position: relative;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.25;
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: color-mix(in oklab, var(--card) 92%, var(--border));
+}
+
+.slot-lecture {
+  background: color-mix(in oklab, var(--accent) 18%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, var(--border));
+}
+.slot-class {
+  background: color-mix(in oklab, var(--card) 88%, var(--border));
+  border: 1px solid color-mix(in oklab, var(--border) 100%, transparent);
+}
+.slot-elective {
+  background: color-mix(in oklab, #22c55e 18%, var(--card));
+  border: 1px solid color-mix(in oklab, #22c55e 28%, var(--border));
+}
+
+.slot-title { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slot-sub   { color: var(--muted); font-size: 12px; }
+
+.slot-badge {
+  position: absolute;
+  top: 4px; right: 6px;
+  display: inline-block;
+  min-width: 18px;
+  padding: 0 6px;
+  height: 18px;
+  border-radius: 9px;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  background: color-mix(in oklab, var(--text) 12%, var(--card));
+  color: var(--text);
+}
+
+/* malé tlačidlo */
+.btn-sm { padding: 4px 8px; font-size: 12px; border-radius: 8px; }
+.btn-danger { color: #ef4444; }
+.btn-danger:hover { background: color-mix(in oklab, #ef4444 10%, var(--card)); }
+
+/* Xko v pravom hornom rohu bloku */
+.slot-remove {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 20px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+.slot-remove:hover { color: var(--text); background: color-mix(in oklab, var(--card) 80%, var(--border)); }
+
+.btn-sm { padding: 4px 8px; border-radius: 8px; font-size: 13px; }
+.btn-danger { color: #ef4444; }
+.btn-danger:hover { background: color-mix(in oklab, #ef4444 12%, var(--card)); }
+
+.slot { position: relative; }
+.slot-remove {
+  position: absolute;
+  top: 4px; right: 6px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.slot-remove:hover { color: var(--text); transform: scale(1.05); }
