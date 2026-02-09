@@ -1,3 +1,3 @@
 # FEI Aladin Viewer
 
-Aplikácia na tvorbu rozvrhov podľa https://aladin.fei.stuba.sk/rozvrh/
+Aplikácia na tvorbu rozvrhov podľa https://rozvrhy.fei.stuba.sk/
